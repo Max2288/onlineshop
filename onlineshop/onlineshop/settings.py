@@ -25,8 +25,15 @@ SECRET_KEY = 'django-insecure-kj91jsot&-hul0i+6bx1^0t4__ucf!cfccf(89k$%kjd6_!mt8
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'kirillprih47@gmail.com'
+EMAIL_HOST_PASSWORD = 'k09082004'
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 
 # Application definition
@@ -121,7 +128,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
