@@ -335,9 +335,10 @@ footer {
 
 .cart-item img {
   width: 100px;
-  height: auto;
+  height: 165px;
   object-fit: cover;
   margin-right: 10px;
+  border-radius: 5px;
 }
 
 .cart-item h3 {
@@ -364,7 +365,7 @@ footer {
   padding: 7px 14px;
   font-size: 14px;
   cursor: pointer;
-  border-radius: 50%;
+  border-radius: 45%;
   margin: 0 10px;
 }
 
@@ -389,7 +390,7 @@ footer {
   font-size: 14px;
   cursor: pointer;
   border-radius: 5px;
-  margin: 0 10px;
+  margin: 10px;
 }
 
 
