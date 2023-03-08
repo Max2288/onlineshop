@@ -29,10 +29,11 @@
 			</a>
 		  </div>					
 		  <div class="heart">
-			<a href="#">
+			<a href="#" id="like-button">
 			  <img src="{% static 'imgs/heart-outline.svg' %}" alt="Heart">
 			</a>
-		  </div>
+			<span style="right:20px;top: 22.5px;right: 111.5px;position: absolute;font-size: small;" id="like-count">0</span>
+		  </div>		  
 		</div>
 	  </header>
 	  <section class="banner">
@@ -129,18 +130,22 @@
 	</section>
 
 	<section class="footer" id="footer">
-		<footer>
-			<div class="container">
-			  <div class="footer-social">
-				<a href="#"><img src="{% static 'imgs/facebook.svg' %}	" alt="Facebook"></a>
-				<a href="#"><img src="{% static 'imgs/twitter.svg' %}" alt="Twitter"></a>
-				<a href="#"><img src="{% static 'imgs/instagram.svg' %}" alt="Instagram"></a>
-			  </div>
-			  <div class="footer-copyright">
-				<p>&copy; 2023 Double Jam company. All rights reserved.</p>
-			  </div>
-			</div>
-		</footer>
+	<footer>
+		<div class="container">
+			<p class="footer-text-upper">
+				Double Jam is a medium-sized company. Our customers who want a lot of interesting content not only read it, but they can also buy it. We are known for our clothes prints.
+			</p>
+		  <div class="footer-social">
+			<a href="#"><img src="{% static 'imgs/facebook.svg' %}" alt="Facebook"></a>
+			<a href="#"><img src="{% static 'imgs/twitter.svg' %}" alt="Twitter"></a>
+			<a href="#"><img src="{% static 'imgs/instagram.svg' %}" alt="Instagram"></a>
+		  </div>
+		  
+		  <div class="footer-text">
+			<p>&copy; 2023 Double Jam company. All rights reserved.</p>
+		  </div>
+		</div>
+	  </footer>
 	</section>
 </body>
 
@@ -298,5 +303,25 @@ function updateCart(product) {
 }
 
 
+	</script>
+	<script>
+		function handleLikeClick() {
+			// Get the current number of likes
+			const likeCount = parseInt(document.getElementById("like-count").innerText);
+		  
+			// Check if the like count is equal to 10
+			if (likeCount === 9) {
+			  // Set the like count to 0
+			  document.getElementById("like-count").innerText = 0;
+			} else {
+			  // Increment the number of likes
+			  const newLikeCount = likeCount + 1;
+			  // Update the number of likes in the HTML
+			  document.getElementById("like-count").innerText = newLikeCount;
+			}
+		  }
+		  
+		  document.getElementById("like-button").addEventListener("click", handleLikeClick);
+		  
 	</script>
 </html>
