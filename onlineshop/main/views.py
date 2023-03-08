@@ -5,6 +5,7 @@ from .form import ContactForm
 
 # Create your views here.
 def index(request):
+    print(request)
     print(request.POST.get('email'))
     if request.POST:
         send_mail('subject', 'message', 'settings.EMAIL_HOST_USER', [request.POST.get('email')], fail_silently=False)
