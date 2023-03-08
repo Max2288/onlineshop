@@ -5,13 +5,15 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="style.css">
+	{% load static %}
+	<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+	<script src="https://smtpjs.com/v3/smtp.js"></script>
 </head>
 <body>
 	<header>
 		<div class="container">
 		  <div class="logo">
-			<img src="logo_black.png" alt="Logo">
+			<img src="{% static 'imgs/logo_black.png' %}" alt="Logo">
 		  </div>
 		  <nav class="navigation">
 			<ul>
@@ -23,19 +25,19 @@
 		  </nav>
 		  <div class="cart">
 			<a href="#">
-			  <img src="basket-outline.svg" alt="Cart">
+			  <img src="{% static 'imgs/basket-outline.svg' %}" alt="Cart">
 			</a>
 		  </div>
 		  <div class="heart">
 			<a href="#">
-			  <img src="heart-outline.svg" alt="Heart">
+			  <img src="{% static 'imgs/heart-outline.svg' %}" alt="Heart">
 			</a>
 		  </div>
 		</div>
 	  </header>
 	  <section class="banner">
 		<video autoplay muted loop id="bg-video">
-		  <source src="video.mp4" type="video/mp4">
+		  <source src="{% static 'videos/video.mp4' %}" type="video/mp4">
 		</video>
 		<div class="container">
 		  <h1>Welcome to Our Online Shop</h1>
@@ -49,28 +51,28 @@
       <h2>Featured Products</h2>
       <div class="product-container">
         <div class="product">
-          <img src="shooes.jpg" alt="Product">
+          <img src="{% static 'imgs/shooes.jpg' %}" alt="Product">
           <h3>DJ Zoom Rival SD 2</h3>
           <p class="price">$99.99</p>
           <p>The synthetic leather on the upper offers contoured support while the integrated strap secures your midfoot, enhancing your precision for launch.</p>
           <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
         <div class="product">
-          <img src="tshirt.png" alt="Product">
+          <img src="{% static 'imgs/tshirt.png' %}" alt="Product">
           <h3>DJ Pro Dri-FIT</h3>
           <p class="price">$99.99</p>
           <p>You give your all to the workout, pushing yourself to the limit. Let the DJ Pro Top keep you cool and comfortable with its soft fabric.</p>
           <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
         <div class="product">
-          <img src="shorts.png" alt="Product">
+          <img src="{% static 'imgs/shorts.png' %}" alt="Product">
           <h3>DJ Dri-FIT Stride</h3>
           <p class="price">$99.99</p>
           <p>Designed for running, the Stride Shorts have a lightweight feel made for unrestricted movement. They're smooth to the touch. </p>
           <a href="#" class="add-to-cart">Add to Cart</a>
         </div>
         <div class="product">
-          <img src="shooes_gold.png" alt="Product">
+          <img src="{% static 'imgs/shooes_gold.png' %}" alt="Product">
           <h3>DJ Dunk Low </h3>
           <p class="price">$99.99</p>
           <p>Choose a perpetual fashion fave with tie-dye print detailing or mix in a paisley graphic to breathe new life into a classic style. </p>
@@ -84,15 +86,15 @@
 			<h2>Featured Categories</h2>
 			<div class="category-container">
 				<div class="category">
-					<img src="shooes_brown.png" alt="Category">
+					<img src="{% static 'imgs/shooes_brown.png' %}" alt="Category">
 					<h3>Zoom Vomero 5</h3>
 				</div>
 				<div class="category">
-					<img src="shooes_purple.png" alt="Category">
+					<img src="{% static 'imgs/shooes_purple.png' %}" alt="Category">
 					<h3>Zoom Freak 4 ASW</h3>
 				</div>
 				<div class="category">
-					<img src="shooes_white_red.png" alt="Category">
+					<img src="{% static 'imgs/shooes_white_red.png' %}" alt="Category">
 					<h3>Cosmic Unity 2</h3>
 				</div>
 			</div>
@@ -104,19 +106,21 @@
 			<h2>Subscribe to our newsletter</h2>
 			<p>Get the latest news and updates delivered to your inbox.</p>
 			<div class="input-container">
-			  <input type="email" placeholder="Enter your email address">
-			  <button type="submit">Subscribe</button>
+				<form method="post">
+					{% csrf_token %}
+				  <input type="email" placeholder="Enter your email address">
+				  <button type="submit">Subscribe</button>
+				</form>
 			</div>
 		  </div>
-		  
 	</section>
 
 	<footer>
 		<div class="container">
 		  <div class="footer-social">
-			<a href="#"><img src="facebook.svg" alt="Facebook"></a>
-			<a href="#"><img src="twitter.svg" alt="Twitter"></a>
-			<a href="#"><img src="instagram.svg" alt="Instagram"></a>
+			<a href="#"><img src="{% static 'imgs/facebook.svg' %}	" alt="Facebook"></a>
+			<a href="#"><img src="{% static 'imgs/twitter.svg' %}" alt="Twitter"></a>
+			<a href="#"><img src="{% static 'imgs/instagram.svg' %}" alt="Instagram"></a>
 		  </div>
 		  <div class="footer-copyright">
 			<p>&copy; 2023 Double Jam company. All rights reserved.</p>
