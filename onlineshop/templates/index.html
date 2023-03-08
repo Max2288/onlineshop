@@ -18,9 +18,9 @@
 		  <nav class="navigation">
 			<ul>
 			  <li><a href="#">Home</a></li>
-			  <li><a href="#">Shop</a></li>
+			  <li><a href="#products">Shop</a></li>
 			  <li><a href="#">About</a></li>
-			  <li><a href="#">Contact</a></li>
+			  <li><a href="#footer">Contact</a></li>
 			</ul>
 		  </nav>
 		  <div class="cart" id="cart-icon">
@@ -46,7 +46,7 @@
 	  </section>
 	  
 	  
-  <section class="products">
+  <section class="products" id="products">
     <div class="container">
       <h2>Featured Products</h2>
       <div class="product-container">
@@ -128,18 +128,20 @@
 		  </div>
 	</section>
 
-	<footer>
-		<div class="container">
-		  <div class="footer-social">
-			<a href="#"><img src="{% static 'imgs/facebook.svg' %}	" alt="Facebook"></a>
-			<a href="#"><img src="{% static 'imgs/twitter.svg' %}" alt="Twitter"></a>
-			<a href="#"><img src="{% static 'imgs/instagram.svg' %}" alt="Instagram"></a>
-		  </div>
-		  <div class="footer-copyright">
-			<p>&copy; 2023 Double Jam company. All rights reserved.</p>
-		  </div>
-		</div>
-	</footer>		
+	<section class="footer" id="footer">
+		<footer>
+			<div class="container">
+			  <div class="footer-social">
+				<a href="#"><img src="{% static 'imgs/facebook.svg' %}	" alt="Facebook"></a>
+				<a href="#"><img src="{% static 'imgs/twitter.svg' %}" alt="Twitter"></a>
+				<a href="#"><img src="{% static 'imgs/instagram.svg' %}" alt="Instagram"></a>
+			  </div>
+			  <div class="footer-copyright">
+				<p>&copy; 2023 Double Jam company. All rights reserved.</p>
+			  </div>
+			</div>
+		</footer>
+	</section>
 </body>
 
 <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
