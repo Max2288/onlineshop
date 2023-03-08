@@ -53,14 +53,14 @@
       <div class="product-container">
         <div class="product">
           <img src="{% static 'imgs/tshort.png' %}" alt="Product">
-          <h3>DJ Zoom Rival SD 2</h3>
+          <h3>DJ Miche Collection</h3>
           <p class="price">$99.99</p>
           <p>Dictator Miche is our favourite logo because we used it to name our project to first project for ICDIIS. It`s our special design.</p>
           <a href="#" class="add-to-cart" id="add-to-cart-1">Add to Cart</a>
         </div>
         <div class="product">
           <img src="{% static 'imgs/tshort1.png' %}" alt="Product">
-          <h3>DJ Pro Dri-FIT</h3>
+          <h3>DJ STM32 Idlers</h3>
           <p class="price">$99.99</p>
           <p>You give your all to the workout, pushing yourself to the limit. Let the STM32 keep you cool and comfortable with its soft fabric.</p>
 		  <a href="#" class="add-to-cart" id="add-to-cart-2">Add to Cart</a>
@@ -148,178 +148,8 @@
 </body>
 
 <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
-<script>
-  (function(){
-    emailjs.init('0YiBCPA5DC-_Qq3Ob');
-  })();
-  
-  document.getElementById('email-form').addEventListener('submit', function(event) {
-    event.preventDefault();
-    // Collect form data
-    const email = document.querySelector('#email-form input[type="email"]').value;
-
-    // Send email
-    const templateParams = {
-      email: email
-    };
-    emailjs.send('service_orinrog', 'template_ar2eb0e', templateParams)
-      .then(function(response) {
-        console.log('SUCCESS!', response.status, response.text);
-      }, function(error) {
-        console.log('FAILED...', error);
-      });
-    document.querySelector('#email-form input[type="email"]').value = '';
-  });
-
-  function addToCart(event) {
-	event.preventDefault(); // prevent the default link behavior
-  
-	// get the product details
-	const product = event.target.parentNode;
-	const title = product.querySelector("h3").textContent;
-	const price = product.querySelector(".price").textContent;
-  
-	// create a cart item object
-	const item = { title, price };
-  
-	// add the item to the cart (you can use localStorage or a server-side database)
-	console.log("Adding item to cart:", item);
-  }
-  
-  document.getElementById("add-to-cart-1").addEventListener("click", addToCart);
-  document.getElementById("add-to-cart-2").addEventListener("click", addToCart);
-  document.getElementById("add-to-cart-3").addEventListener("click", addToCart);
-  document.getElementById("add-to-cart-4").addEventListener("click", addToCart);
-  
-  function openCart() {
-	var cartWindow = document.querySelector('.cart-window');
-	cartWindow.classList.toggle('open');
-  }
-  
-  
-</script>
-
-<script>
-    const cartItems = [];
-
-    document.querySelectorAll('.add-to-cart').forEach(button => {
-        button.addEventListener('click', () => {
-            const productId = button.id.split('-')[3];
-            const product = {
-                id: productId,
-                title: document.querySelector(`#add-to-cart-${productId}`).previousElementSibling.previousElementSibling.previousElementSibling.textContent,
-                price: document.querySelector(`#add-to-cart-${productId}`).previousElementSibling.previousElementSibling.textContent,
-                image: document.querySelector(`#add-to-cart-${productId}`).previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.src
-            };
-            cartItems.push(product);
-            updateCart(product);
-        });
-    });
-</script>
-<script>
-function updateCart(product) {
-	let cartItem = document.createElement('div');
-	cartItem.classList.add('cart-item');
-	cartItem.innerHTML = `
-		<img src="${product.image}" alt="Product">
-		<div>
-		<h3>${product.title}</h3>
-		<p class="price">${product.price}</p>
-		<div class="quantity-container">
-			<button class="decrement-btn"><</button>
-			<input type="text" value="1" class="quantity">
-			<button class="increment-btn">></button>
-		</div>
-		<button class="remove-btn">Remove</button>
-		</div>
-	`;
-  let cartItems = document.querySelector('.cart-items');
-  let cartTotal = document.querySelector('.cart-total h3');
-  let items = cartItems.getElementsByClassName('cart-item');
-  let total = 0;
-  for (let i = 0; i < items.length; i++) {
-    let itemPrice = parseFloat(items[i].querySelector('.price').textContent.replace('$', ''));
-    let itemQuantity = items[i].querySelector('.quantity').value;
-    total += itemPrice * itemQuantity;
-  }
-  total = Math.round(total * 100) / 100;
-  cartTotal.textContent = `Total: $${total}`;
-  cartItems.append(cartItem);
-
-  let removeBtns = document.querySelectorAll('.remove-btn');
-  removeBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      btn.parentElement.parentElement.remove();
-      updateTotal();
-    });
-  });
-
-  let quantityInputs = document.querySelectorAll('.quantity');
-  quantityInputs.forEach(function(input) {
-    updateTotal();
-    input.addEventListener('change', function() {
-      if (input.value <= 0) {
-        input.value = 1;
-      }
-      updateTotal();
-    });
-  });
-
-  let incrementBtns = document.querySelectorAll('.increment-btn');
-  incrementBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      let quantityInput = btn.previousElementSibling;
-      let currentQuantity = parseInt(quantityInput.value);
-      quantityInput.value = currentQuantity + 1;
-      updateTotal();
-    });
-  });
-
-  let decrementBtns = document.querySelectorAll('.decrement-btn');
-  decrementBtns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      let quantityInput = btn.nextElementSibling;
-      let currentQuantity = parseInt(quantityInput.value);
-      if (currentQuantity > 1) {
-        quantityInput.value = currentQuantity - 1;
-        updateTotal();
-      }
-    });
-  });
-
-  function updateTotal() {
-    let items = cartItems.getElementsByClassName('cart-item');
-    let total = 0;
-    for (let i = 0; i < items.length; i++) {
-      let itemPrice = parseFloat(items[i].querySelector('.price').textContent.replace('$', ''));
-      let itemQuantity = items[i].querySelector('.quantity').value;
-      total += itemPrice * itemQuantity;
-    }
-    total = Math.round(total * 100) / 100;
-    cartTotal.textContent = `Total: $${total}`;
-  }
-}
-
-
-	</script>
-	<script>
-		function handleLikeClick() {
-			// Get the current number of likes
-			const likeCount = parseInt(document.getElementById("like-count").innerText);
-		  
-			// Check if the like count is equal to 10
-			if (likeCount === 9) {
-			  // Set the like count to 0
-			  document.getElementById("like-count").innerText = 0;
-			} else {
-			  // Increment the number of likes
-			  const newLikeCount = likeCount + 1;
-			  // Update the number of likes in the HTML
-			  document.getElementById("like-count").innerText = newLikeCount;
-			}
-		  }
-		  
-		  document.getElementById("like-button").addEventListener("click", handleLikeClick);
-		  
-	</script>
+<script src="../static/js/add_to_cart.js"></script>
+<script src="../static/js/email.js"></script>
+<script src="../static/js/heart_like.js"></script>
+<script src="../static/js/update_cart.js"></script>
 </html>
