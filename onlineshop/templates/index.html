@@ -23,11 +23,11 @@
 			  <li><a href="#">Contact</a></li>
 			</ul>
 		  </nav>
-		  <div class="cart">
-			<a href="#">
+		  <div class="cart" id="cart-icon">
+			<a href="#" onclick="openCart()">
 			  <img src="{% static 'imgs/basket-outline.svg' %}" alt="Cart">
 			</a>
-		  </div>
+		  </div>					
 		  <div class="heart">
 			<a href="#">
 			  <img src="{% static 'imgs/heart-outline.svg' %}" alt="Heart">
@@ -55,32 +55,42 @@
           <h3>DJ Zoom Rival SD 2</h3>
           <p class="price">$99.99</p>
           <p>The synthetic leather on the upper offers contoured support while the integrated strap secures your midfoot, enhancing your precision for launch.</p>
-          <a href="#" class="add-to-cart">Add to Cart</a>
+          <a href="#" class="add-to-cart" id="add-to-cart-1">Add to Cart</a>
         </div>
         <div class="product">
           <img src="{% static 'imgs/tshirt.png' %}" alt="Product">
           <h3>DJ Pro Dri-FIT</h3>
           <p class="price">$99.99</p>
           <p>You give your all to the workout, pushing yourself to the limit. Let the DJ Pro Top keep you cool and comfortable with its soft fabric.</p>
-          <a href="#" class="add-to-cart">Add to Cart</a>
+		  <a href="#" class="add-to-cart" id="add-to-cart-2">Add to Cart</a>
         </div>
         <div class="product">
           <img src="{% static 'imgs/shorts.png' %}" alt="Product">
           <h3>DJ Dri-FIT Stride</h3>
           <p class="price">$99.99</p>
           <p>Designed for running, the Stride Shorts have a lightweight feel made for unrestricted movement. They're smooth to the touch. </p>
-          <a href="#" class="add-to-cart">Add to Cart</a>
+          <a href="#" class="add-to-cart" id="add-to-cart-3">Add to Cart</a>
         </div>
         <div class="product">
           <img src="{% static 'imgs/shooes_gold.png' %}" alt="Product">
           <h3>DJ Dunk Low </h3>
           <p class="price">$99.99</p>
           <p>Choose a perpetual fashion fave with tie-dye print detailing or mix in a paisley graphic to breathe new life into a classic style. </p>
-          <a href="#" class="add-to-cart">Add to Cart</a>
+          <a href="#" class="add-to-cart" id="add-to-cart-4">Add to Cart</a>
         </div>
       </div>
     </div>
   </section>
+  <div class="cart-window">
+	<div class="cart-items">
+	  <!-- cart items will be dynamically added here -->
+	</div>
+	<div class="cart-total">
+	  <h3>Total: $0.00</h3>
+	  <button class="checkout-btn">Checkout</button>
+	</div>
+  </div>
+  
   <section class="featured-categories">
 		<div class="container" style="text-align: center;">
 			<h2>Featured Categories</h2>
@@ -100,18 +110,18 @@
 			</div>
 		</div>
 	</section>
+	
 
 	<section class="newsletter">
 		<div class="newsletter">
 			<h2>Subscribe to our newsletter</h2>
 			<p>Get the latest news and updates delivered to your inbox.</p>
 			<div class="input-container">
-				<form method="post">
-					{% csrf_token %}
+				<form id="email-form">
 				  <input type="email" placeholder="Enter your email address">
-				  <button type="submit">Subscribe</button>
+				  <button id="submit-btn" type="submit">Subscribe</button>
 				</form>
-			</div>
+			  </div>			  
 		  </div>
 	</section>
 
@@ -126,10 +136,59 @@
 			<p>&copy; 2023 Double Jam company. All rights reserved.</p>
 		  </div>
 		</div>
-	</footer>
-	  
-	  
-			
+	</footer>		
 </body>
+
+<script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script>
+  (function(){
+    emailjs.init('0YiBCPA5DC-_Qq3Ob');
+  })();
+  
+  document.getElementById('email-form').addEventListener('submit', function(event) {
+    event.preventDefault();
+    // Collect form data
+    const email = document.querySelector('#email-form input[type="email"]').value;
+
+    // Send email
+    const templateParams = {
+      email: email
+    };
+    emailjs.send('service_orinrog', 'template_ar2eb0e', templateParams)
+      .then(function(response) {
+        console.log('SUCCESS!', response.status, response.text);
+      }, function(error) {
+        console.log('FAILED...', error);
+      });
+    document.querySelector('#email-form input[type="email"]').value = '';
+  });
+
+  function addToCart(event) {
+	event.preventDefault(); // prevent the default link behavior
+  
+	// get the product details
+	const product = event.target.parentNode;
+	const title = product.querySelector("h3").textContent;
+	const price = product.querySelector(".price").textContent;
+  
+	// create a cart item object
+	const item = { title, price };
+  
+	// add the item to the cart (you can use localStorage or a server-side database)
+	console.log("Adding item to cart:", item);
+  }
+  
+  document.getElementById("add-to-cart-1").addEventListener("click", addToCart);
+  document.getElementById("add-to-cart-2").addEventListener("click", addToCart);
+  document.getElementById("add-to-cart-3").addEventListener("click", addToCart);
+  document.getElementById("add-to-cart-4").addEventListener("click", addToCart);
+  
+  function openCart() {
+	var cartWindow = document.querySelector('.cart-window');
+	cartWindow.classList.toggle('open');
+  }
+  
+  
+</script>
 
 </html>
